@@ -1,0 +1,57 @@
+<div class="container">
+	<div *ngIf="errorMessage" class="alert alert-danger" role="alert">
+		<strong>Error:</strong> {{errorMessage}}
+	</div>
+  
+  <div class="row">
+    <div class="col-md-9">
+        <h1 class="asset-title" id='assetName'>출석체크</h1>
+    </div>
+    <div class="col-md-3">
+      
+    </div>
+  </div>
+  <br>
+  <div class="row">
+    <div class="col-md-12">
+      <table class="table table-responsive">
+        <thead class="thead">
+          <tr class="thead-cols">
+            
+  
+                <th class="info">선거이름</th>
+            
+                <th class="info">학부</th>
+            
+                <th class="info">선거 날짜</th>
+            
+            
+                <th class="info">선거 상태</th>
+            
+                <th class="info">출석</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let asset of allAssets">
+
+            
+                <td class="asset-properties">{{asset.name}}</td>
+            
+                <td class="asset-properties">{{asset.school}}</td>
+            
+                <td class="asset-properties">{{asset.electionDate}}</td>
+            
+                <td class="asset-properties">{{asset.status}}</td>
+            
+            <td>
+
+              <button [routerLink]="['/StuList', asset.school]" type="button" class="btn btn-primary" >
+                  출석확인
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

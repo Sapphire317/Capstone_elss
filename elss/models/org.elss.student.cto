@@ -1,0 +1,64 @@
+namespace org.elss.student
+
+import org.elss.common.Contact
+import org.elss.common.School
+
+asset Student identified by studentId {
+  o String studentId       //학번을 키로 함
+  o String name
+  o School school
+  o Contact contact optional
+  o Attendance attendance default="NOT"
+}
+
+enum Attendance {
+  o ATTENDED
+  o NOT
+}
+
+//transactions for AO
+transaction createStudent {
+  o String studentId
+  o String name
+  o String school
+  o String email
+  o String cell
+}
+
+transaction modifyStudent {
+  o String studentId
+  o String name
+  o School school
+  o String email
+  o String cell
+}
+
+transaction deleteStudent {
+  o String studentId
+}
+
+//transaction for TF
+transaction setAttendance {
+  o String studentId
+  o Attendance attendance
+}
+
+
+//events
+event studentCreated {
+  o String studentId
+}
+
+event studentModified {
+  o String studentId
+}
+
+event studentDeleted {
+  o String studentId
+}
+
+event attendanceSet {
+  o String studentId
+  o Attendance attendance
+}
+

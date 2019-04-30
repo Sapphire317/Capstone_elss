@@ -1,0 +1,73 @@
+namespace org.elss.election
+
+import org.elss.common.School
+import org.elss.votingbox.VotingBox
+import org.elss.student.Student
+
+asset Election identified by electionKey {
+  o String electionKey                    //naming: [학부][YYMMDD][name]
+  o String name
+  o School school
+  o DateTime electionDate         //선거 당일
+  o Double quorumRate range=[0.0, 1.0]
+  o Status status default="PREP"
+  o String[] casted optional
+  --> VotingBox[] boxes optional
+}
+
+enum Status {
+  o PREP    //준비단계: 
+  o POLL    //선거당시
+  o END     //선거
+}
+
+// Trasnactions for EM
+transaction createElection {
+  o School school
+  o String name
+  o DateTime electionDate
+  o Double quorumRate
+}
+
+transaction deleteElection {
+  o String electionKey
+}
+
+transaction changeElectionStatus{
+  o String electionKey
+  o Status status
+}
+
+//transactions for V
+transaction addVotingBox {
+  o String electionKey
+  o String boxId
+}
+
+transaction addCasted {
+  o String electionKey
+  o String studentId
+}
+
+//events
+event electionCreated{
+  o String electionKey
+}
+
+event electionDeleted {
+  o String electionKey
+}
+
+event statusChanged{
+  o Status status
+}
+
+event votingBoxAdded { 
+  o String electionKey
+  o String boxId
+}
+
+event castedAdded {
+  o String electionKey
+  o String studentId
+}

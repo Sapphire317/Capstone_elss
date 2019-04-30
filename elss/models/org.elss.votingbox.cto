@@ -1,0 +1,43 @@
+namespace org.elss.votingbox
+
+import org.elss.common.*
+import org.elss.election.Election
+
+asset VotingBox identified by boxId {
+  o String boxId                    //naming: [name][Election레지스트리의키값]
+  o String name
+  o Integer ballotCount default = 0   //득표수
+  -->Election election 
+}
+
+//transactions for EM
+transaction createVotingBox {
+  o String electionKey
+  o String name
+}
+
+transaction deleteVotingBox {
+  o String boxId
+}
+
+//transactions for voters
+transaction ballotCast {
+  o String boxId
+}
+
+
+//events
+
+//이 이벤트가 호출되면 Election객체에서 addVotingBox tx가 실행되어야 함
+event votingBoxCreated {
+  o String electionKey
+  o String boxId
+}
+
+event votingBoxDeleted {
+  o String boxId
+}
+
+event ballotCasted {
+  o String boxId
+}

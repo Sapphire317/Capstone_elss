@@ -1,0 +1,11 @@
+table,
+tr,
+tbody,
+th,
+td {
+  text-align: center;
+}
+
+.table td {
+  text-align: center;
+}

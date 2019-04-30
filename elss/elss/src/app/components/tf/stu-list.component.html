@@ -1,0 +1,51 @@
+<div class="container">
+	<div *ngIf="errorMessage" class="alert alert-danger" role="alert">
+		<strong>Error:</strong> {{errorMessage}}
+	</div>
+  
+  <div class="row">
+  <div class="col-md-2">
+      <button [routerLink]="['/TF']" type="button" class="btn btn-primary" >
+                  뒤로가기
+              </button>
+    </div>
+    <div class="col-md-10">
+        <h1 class="asset-title" id='assetName'>학생목록</h1>
+    </div>
+    
+  </div>
+  <br>
+  <div class="row">
+    <div class="col-md-6">
+      <table class="table table-responsive">
+        <thead class="thead">
+          <tr class="thead-cols">
+            
+  
+                <th class="info">이름</th>
+            
+                <th class="info">출석</th>
+            
+                <th class="info"></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let asset of studentList">
+                <td class="asset-properties">{{asset.name}}</td>
+            
+                <td class="asset-properties">{{asset.attendance}}</td>
+            
+            <td>
+              <button (click)="setAttendance(asset.studentId, 'ATTENDED')" type="button" class="btn btn-success" >
+                  출석
+              </button>
+              <button (click)="setAttendance(asset.studentId, 'NOT')" type="button" class="btn btn-danger" >
+                  취소
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
