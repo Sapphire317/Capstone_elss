@@ -1,0 +1,65 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-9">
+        <h1 class="asset-title" id='assetName'>후보</h1>
+    </div>
+    <div class="col-md-3">
+    </div>
+  <br>
+  <div class="row">
+    <div class="col-md-12">
+      <table class="table table-responsive">
+        <thead class="thead">
+          <tr class="thead-cols">
+            
+                <th class="info">번호</th>
+            
+                <th class="info">이름</th>
+
+                <th class="info"> </th>
+            
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let asset of allAssets; index as i"> 
+
+                <td class="asset-properties">{{i+1}}</td>
+            
+                <td class="asset-properties">{{asset.name}}</td>
+          
+          
+                <td class="asset-properties">
+              
+                  <button  (click)="setId(asset.boxId)" type="button" class="btn btn-primary"  data-toggle="modal" data-target="#ballocCastModal">
+                  투표
+                  </button>
+                 </td>
+
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+
+<div class="modal fade" id="ballocCastModal" tabindex="-1" role="dialog" aria-labelledby="ballocCastModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="ballocCastModalLabel">투표 확인</h4>
+        <p class="modal-intro">정말 투표하시겠습니까?</p>
+      </div>
+
+        <div class="modal-body">
+
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">취소</button>
+            <button (click)="ballotCast();" type="button" class="btn btn-success" data-dismiss="modal">확인</button>
+        </div>
+
+    </div>
+  </div>
+</div>

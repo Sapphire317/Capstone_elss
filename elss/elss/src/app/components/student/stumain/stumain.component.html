@@ -1,3 +1,55 @@
-<p>
-  stumain works!
-</p>
+<div class="container">
+	<div *ngIf="errorMessage" class="alert alert-danger" role="alert">
+		<strong>Error:</strong> {{errorMessage}}
+	</div>
+  
+  <div class="row">
+    <div class="col-md-9">
+        <h1 class="asset-title" id='assetName'>선거</h1>
+    </div>
+    
+  </div>
+  <br>
+  <div class="row">
+    <div class="col-md-12">
+      <table class="table table-responsive">
+        <thead class="thead">
+          <tr class="thead-cols">
+            
+                <th class="info">이름</th>
+            
+                <th class="info">학부</th>
+            
+                <th class="info">날짜</th>
+          
+                <th class="info">상태</th>
+          
+              <th class="info">Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let asset of allAssets">
+
+            
+          
+                <td class="asset-properties">{{asset.name}}</td>
+            
+                <td class="asset-properties">{{asset.school}}</td>
+            
+                <td class="asset-properties">{{asset.electionDate}}</td>
+      
+            
+                <td class="asset-properties">{{asset.status}}</td>
+                
+                 <td class="asset-properties">
+                 <button [routerLink]="['/Ballot', asset.electionKey]" type="button" class="btn btn-primary" >
+                  투표하기
+                </button>
+                </td>
+          
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

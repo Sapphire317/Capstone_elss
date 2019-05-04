@@ -54,6 +54,8 @@ import { StuListComponent } from './components/tf/stu-list.component';
 import { StuloginComponent } from './components/student/stulogin/stulogin.component';
 import { StumainComponent } from './components/student/stumain/stumain.component';
 import { CandidateComponent } from './components/em/candidate/candidate.component';
+import { BallotComponent } from './components/student/stumain/ballot/ballot.component';
+import { CastedstuComponent } from './components/em/candidate/castedstu/castedstu.component';
 
   @NgModule({
   declarations: [
@@ -87,7 +89,9 @@ import { CandidateComponent } from './components/em/candidate/candidate.componen
     StuListComponent,
     StuloginComponent,
     StumainComponent,
-    CandidateComponent
+    CandidateComponent,
+    BallotComponent,
+    CastedstuComponent
   ],
   imports: [
     BrowserModule,
