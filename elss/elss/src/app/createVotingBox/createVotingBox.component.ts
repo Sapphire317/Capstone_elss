@@ -35,7 +35,7 @@ export class createVotingBoxComponent implements OnInit {
   electionKey = new FormControl('', Validators.required);
   name = new FormControl('', Validators.required);
   transactionId = new FormControl('', Validators.required);
-  timestamp = new FormControl('', Va lidators.required);
+  timestamp = new FormControl('', Validators.required);
 
 
   constructor(private servicecreateVotingBox: createVotingBoxService, fb: FormBuilder) {

@@ -223,8 +223,8 @@ public model: any = { date: { year: 2018, month: 10, day: 9 } };
       $class: 'org.elss.election.changeElectionStatus',
       'electionKey': this.currentId,
       'status': this.status.value,
-      'transactionId': this.transactionId.value,
-      'timestamp': this.timestamp.value
+      'transactionId': null,
+      'timestamp': null
     };
 
     this.CESForm.setValue({

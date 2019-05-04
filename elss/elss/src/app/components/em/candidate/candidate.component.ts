@@ -14,6 +14,8 @@ export class CandidateComponent implements OnInit {
 
 
   myForm: FormGroup;
+  deleteVBForm : FormGroup;
+
 
   private allAssets;
   private allTransactions;
@@ -25,6 +27,11 @@ export class CandidateComponent implements OnInit {
   name = new FormControl('', Validators.required);
   transactionId = new FormControl('', Validators.required);
   timestamp = new FormControl('', Validators.required);
+  
+
+  //deleteVotingBox
+
+  boxId = new FormControl('', Validators.required);
 
   constructor(private route: ActivatedRoute, private serviceCD: CandidateService, fb: FormBuilder) {
     this.myForm = fb.group({
@@ -34,15 +41,16 @@ export class CandidateComponent implements OnInit {
       timestamp: this.timestamp
     });
 
+    this.deleteVBForm = fb.group({
+      boxId: this.boxId,
+      transactionId: this.transactionId,
+      timestamp: this.timestamp
+    });
+
     this.route.params.subscribe(params => {
-      this.serviceStuList.getStudentsBySchool(this.url, params['school']).subscribe(
-        data => {
-          this.studentList = data;
-          console.log(this.studentList);
-        }
-      )
-   });
-  }
+      this.electionKey= params['electionKey'];
+  });
+}
 
   ngOnInit() {
     this.loadVotingBox();
@@ -57,8 +65,9 @@ export class CandidateComponent implements OnInit {
       result.forEach(asset => {
         tempList.push(asset);
       });
-      console.log(this.allAssets);
+      
       this.allAssets = tempList;
+      console.log(this.allAssets);
     })
     .catch((error) => {
       if (error === 'Server error') {
@@ -74,7 +83,7 @@ export class CandidateComponent implements OnInit {
   createVotingBox(form: any): Promise<any> {
     this.Transaction = {
       $class: 'org.elss.votingbox.createVotingBox',
-      'electionKey': this.electionKey.value,
+      'electionKey': this.electionKey,
       'name': this.name.value,
       'transactionId': this.transactionId.value,
       'timestamp': this.timestamp.value
@@ -107,6 +116,39 @@ export class CandidateComponent implements OnInit {
     });
   }
 
+  deleteVotingBox(form: any): Promise<any> {
+    this.Transaction = {
+      $class: 'org.elss.votingbox.deleteVotingBox',
+      'boxId': this.currentId,
+      'transactionId': null,
+      'timestamp': null
+    };
+
+    this.deleteVBForm.setValue({
+      'boxId': null,
+      'transactionId': null,
+      'timestamp': null
+    });
+
+    return this.serviceCD.deleteVotingBox(this.Transaction)
+    .toPromise()
+    .then(() => {
+      this.errorMessage = null;
+      this.deleteVBForm.setValue({
+        'boxId': null,
+        'transactionId': null,
+        'timestamp': null
+      });
+    })
+    .catch((error) => {
+      if (error === 'Server error') {
+        this.errorMessage = 'Could not connect to REST server. Please check your configuration details';
+      } else {
+        this.errorMessage = error;
+      }
+    });
+  }
+
   resetForm(): void {
     this.myForm.setValue({
       'electionKey': null,
@@ -114,5 +156,10 @@ export class CandidateComponent implements OnInit {
       'transactionId': null,
       'timestamp': null
     });
+  }
+
+  setId(id: any): void {
+    this.currentId = id;
+    console.log(this.currentId);
   }
 }
