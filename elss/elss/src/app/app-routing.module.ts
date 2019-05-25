@@ -50,9 +50,11 @@ import { StuListComponent } from './components/tf/stu-list.component';
 import { StuloginComponent } from './components/student/stulogin/stulogin.component';
 import { StumainComponent } from './components/student/stumain/stumain.component';
 import { BallotComponent } from './components/student/stumain/ballot/ballot.component';
+import { CastedstuComponent } from './components/em/candidate/castedstu/castedstu.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
+  { path: 'castedStu/:electionKey', component: CastedstuComponent},
   { path: 'StuList/:school', component: StuListComponent},
   { path: 'Ballot/:electionKey', component: BallotComponent},
   { path: 'EM', component: EmComponent },

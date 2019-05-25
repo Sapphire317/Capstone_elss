@@ -12,7 +12,12 @@
  * limitations under the License.
  */
 
-import { Component, AfterViewInit } from '@angular/core';
+import { Component, OnInit, AfterViewInit } from '@angular/core';
+import { AuthService } from 'angular4-social-login';
+import {  GoogleLoginProvider } from "angular4-social-login";
+import { SocialUser } from "angular4-social-login";
+
+
 import $ from 'jquery';
 
 @Component({
@@ -20,7 +25,35 @@ import $ from 'jquery';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent implements AfterViewInit {
+export class AppComponent implements OnInit, AfterViewInit {
+
+  private user: SocialUser;
+  public loggedIn: boolean;
+  public islogged: boolean;
+
+  constructor(private authService: AuthService){}
+
+  ngOnInit() {
+    this.authService.authState.subscribe((user) => {
+      this.user = user;
+      this.loggedIn = (user != null);
+      this.islogged = true;
+    });
+
+    console.log(this.user);
+  }
+
+  signInWithGoogle(): void {
+    this.authService.signIn(GoogleLoginProvider.PROVIDER_ID);
+  }
+
+  signOut(): void {
+    this.authService.signOut();
+  }
+
+  
+ 
+
   title = 'app works!';
 
   ngAfterViewInit() {

@@ -23,6 +23,7 @@ import { DataService } from './data.service';
 import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
 
+
 import { ElectionComponent } from './Election/Election.component';
 import { StudentComponent } from './Student/Student.component';
 import { VotingBoxComponent } from './VotingBox/VotingBox.component';
@@ -56,6 +57,30 @@ import { StumainComponent } from './components/student/stumain/stumain.component
 import { CandidateComponent } from './components/em/candidate/candidate.component';
 import { BallotComponent } from './components/student/stumain/ballot/ballot.component';
 import { CastedstuComponent } from './components/em/candidate/castedstu/castedstu.component';
+import { StuprofileComponent } from './components/student/stuprofile/stuprofile.component';
+import { SocialLoginModule, AuthServiceConfig } from 'angular4-social-login';
+import { GoogleLoginProvider, FacebookLoginProvider } from 'angular4-social-login';
+
+// const config = {
+//   apiKey: "AIzaSyDD6dNsWvbAa1Uz86VsR7CR-vl3jVm7NLg",
+//   authDomain: "elss-98e71.firebaseapp.com",
+//   databaseURL: "https://elss-98e71.firebaseio.com",
+//   projectId: "elss-98e71",
+//   storageBucket: "elss-98e71.appspot.com",
+//   messagingSenderId: "1025898438701",
+//   appId: "1:1025898438701:web:b30017fc340f95e5"
+// }
+
+let config = new AuthServiceConfig([
+  {
+    id: GoogleLoginProvider.PROVIDER_ID,
+    provider: new GoogleLoginProvider("830576976759-2vj7f0s59shgrq9d6913e9e573tp0k3q.apps.googleusercontent.com")
+  }
+]);
+
+export function provideConfig() {
+  return config;
+}
 
   @NgModule({
   declarations: [
@@ -91,7 +116,8 @@ import { CastedstuComponent } from './components/em/candidate/castedstu/castedst
     StumainComponent,
     CandidateComponent,
     BallotComponent,
-    CastedstuComponent
+    CastedstuComponent,
+    StuprofileComponent
   ],
   imports: [
     BrowserModule,
@@ -100,9 +126,14 @@ import { CastedstuComponent } from './components/em/candidate/castedstu/castedst
     HttpModule,
     AppRoutingModule,
     MyDatePickerModule,
-    HttpClientModule
+    HttpClientModule,
+    SocialLoginModule.initialize(config)
   ],
   providers: [
+    {
+    provide: AuthServiceConfig,
+    useFactory:provideConfig
+  },
     DataService
   ],
   bootstrap: [AppComponent]

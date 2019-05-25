@@ -18,5 +18,8 @@ export class StumainService {
     return this.dataService_Elec.getAll(this.NS_Elec);
   }
   
+  public getElection(id: any): Observable<Election> {
+    return this.dataService_Elec.getSingle(this.NS_Elec, id);
+  }
 }
 

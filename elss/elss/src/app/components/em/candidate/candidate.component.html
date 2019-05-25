@@ -13,7 +13,7 @@
           후보 추가
         </button>
 
-        <button [routerLink]="['/StuList', asset.school]" type="button" class="btn btn-primary" >
+        <button [routerLink]="['/castedStu', electionKey]" type="button" class="btn btn-primary" >
                   투표한 학생 확인
         </button>
       </div>
@@ -73,7 +73,7 @@
         <h4 class="modal-title" id="createVotingBoxModalLabel">후보 추가</h4>
         <p class="modal-intro">아래 정보를 입력하세요.</p>
       </div>
-      <form [formGroup]="myForm">
+      <form [formGroup]="vbForm">
         <div class="modal-body">
             
           
@@ -90,7 +90,7 @@
         </div>
         <div class="modal-footer">
             <button type="button" class="btn btn-default" data-dismiss="modal">취소</button>
-            <button (click)="createVotingBox(myForm);" type="submit" class="btn btn-success" data-dismiss="modal">확인</button>
+            <button (click)="createVotingBox(vbForm);" type="submit" class="btn btn-success" data-dismiss="modal">확인</button>
         </div>
       </form>
     </div>

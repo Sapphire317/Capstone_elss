@@ -1,0 +1,8 @@
+composer card delete admin@YOURBUSINESSNETWORKNAME
+docker container stop <CONTAINER ID>
+docker container rm <CONTAINER ID>
+docker image rm <IMAGE ID>
+(fabric-dev-servers dev server Directory)/stopFabric.sh
+(fabric-dev-servers dev server Directory)/startFabric.sh
+composer network install --card PeerAdmin@hlfv1 --archiveFile YOURNETWORKNAME@0.0.1.bna
+composer network start -c PeerAdmin@hlfv1 -n elss -V 0.0.6 -A admin -S adminpw

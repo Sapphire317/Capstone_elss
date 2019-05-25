@@ -12,8 +12,7 @@ import 'rxjs/add/operator/toPromise';
 })
 export class CandidateComponent implements OnInit {
 
-
-  myForm: FormGroup;
+  vbForm: FormGroup;
   deleteVBForm : FormGroup;
 
 
@@ -34,7 +33,7 @@ export class CandidateComponent implements OnInit {
   boxId = new FormControl('', Validators.required);
 
   constructor(private route: ActivatedRoute, private serviceCD: CandidateService, fb: FormBuilder) {
-    this.myForm = fb.group({
+    this.vbForm = fb.group({
       electionKey: this.electionKey,
       name: this.name,
       transactionId: this.transactionId,
@@ -49,6 +48,7 @@ export class CandidateComponent implements OnInit {
 
     this.route.params.subscribe(params => {
       this.electionKey= params['electionKey'];
+      console.log(this.electionKey);
   });
 }
 
@@ -89,7 +89,7 @@ export class CandidateComponent implements OnInit {
       'timestamp': this.timestamp.value
     };
 
-    this.myForm.setValue({
+    this.vbForm.setValue({
       'electionKey': null,
       'name': null,
       'transactionId': null,
@@ -100,7 +100,7 @@ export class CandidateComponent implements OnInit {
     .toPromise()
     .then(() => {
       this.errorMessage = null;
-      this.myForm.setValue({
+      this.vbForm.setValue({
         'electionKey': null,
         'name': null,
         'transactionId': null,
@@ -150,7 +150,7 @@ export class CandidateComponent implements OnInit {
   }
 
   resetForm(): void {
-    this.myForm.setValue({
+    this.vbForm.setValue({
       'electionKey': null,
       'name': null,
       'transactionId': null,

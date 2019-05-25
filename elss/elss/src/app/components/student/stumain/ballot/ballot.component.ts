@@ -2,8 +2,11 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
+import { AuthService } from 'angular4-social-login';
+import { SocialUser } from "angular4-social-login";
 import { BallotService } from './ballot.service';
 import 'rxjs/add/operator/toPromise';
+import { addCasted } from 'app/org.elss.election';
 
 @Component({
   selector: 'app-ballot',
@@ -13,7 +16,11 @@ import 'rxjs/add/operator/toPromise';
 })
 export class BallotComponent implements OnInit {
 
+  private user: SocialUser;
+  public loggedIn: boolean;
+
   BCForm : FormGroup;
+  ACForm : FormGroup;
 
   private allAssets;
   private allTransactions;
@@ -22,14 +29,16 @@ export class BallotComponent implements OnInit {
   private errorMessage;
 
   private electionKey;
-
+  private castedList;
+  private isNew;
+  stuId:String ;
 
   boxId = new FormControl('', Validators.required);
   name = new FormControl('', Validators.required);
   transactionId = new FormControl('', Validators.required);
   timestamp = new FormControl('', Validators.required);
 
-  constructor(private route: ActivatedRoute, private serviceB: BallotService, fb: FormBuilder) {
+  constructor(private route: ActivatedRoute, private serviceB: BallotService, fb: FormBuilder, private authService: AuthService) {
     this.route.params.subscribe(params => {
       this.electionKey= params['electionKey'];
   });
@@ -40,10 +49,27 @@ export class BallotComponent implements OnInit {
     timestamp: this.timestamp
   });
 
+  this.ACForm = fb.group({
+    electionKey: null,
+    studentId: null,
+    transactionId: null,
+    timestamp: null
+  });
    }
 
   ngOnInit() {
+    this.authService.authState.subscribe((user) => {
+      this.user = user;
+      this.loggedIn = (user != null);
+    });
+
+    if(this.loggedIn){
+      console.log(this.user.email.substring(0,8));
+      this.stuId = this.user.email.substring(0,8);
+    }
+
     this.loadVotingBox();
+    this.loadElection();
   }
 
 
@@ -102,6 +128,64 @@ export class BallotComponent implements OnInit {
         this.errorMessage = error;
       }
     });
+  }
+
+  loadElection(): Promise<any> {
+    const tempList = [];
+    return this.serviceB.getElection(this.electionKey)
+    .toPromise()
+    .then((result) => {
+      this.errorMessage = null;
+ 
+      this.castedList=result['casted'];
+      console.log(this.castedList);
+    })
+    .catch((error) => {
+      if (error === 'Server error') {
+        this.errorMessage = 'Could not connect to REST server. Please check your configuration details';
+      } else if (error === '404 - Not Found') {
+        this.errorMessage = '404 - Could not find API route. Please check your available APIs.';
+      } else {
+        this.errorMessage = error;
+      }
+    });
+  }
+
+  addCasted(): Promise<any> {
+    this.Transaction = {
+      $class: 'org.elss.election.addCasted',
+      'electionKey': this.electionKey,
+      'studentId': this.stuId,
+      'transactionId': this.transactionId.value,
+      'timestamp': this.timestamp.value
+    };
+
+    this.ACForm.setValue({
+      'electionKey': null,
+      'studentId': null,
+      'transactionId': null,
+      'timestamp': null
+    });
+
+    return this.serviceB.addCasted(this.Transaction)
+    .toPromise()
+    .then(() => {
+      this.errorMessage = null;
+      this.BCForm.setValue({
+        'electionKey': null,
+        'studentId': null,
+        'transactionId': null,
+        'timestamp': null
+      });
+    })
+    .catch((error) => {
+      if (error === 'Server error') {
+        this.errorMessage = 'Could not connect to REST server. Please check your configuration details';
+      } else {
+        this.errorMessage = error;
+      }
+    })
+    ;
   }
 
   setId(id){

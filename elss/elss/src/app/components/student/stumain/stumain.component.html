@@ -42,7 +42,7 @@
                 <td class="asset-properties">{{asset.status}}</td>
                 
                  <td class="asset-properties">
-                 <button [routerLink]="['/Ballot', asset.electionKey]" type="button" class="btn btn-primary" >
+                 <button (click)="setKey(asset.electionKey)" type="button" class="btn btn-primary" >
                   투표하기
                 </button>
                 </td>

@@ -1,0 +1,13 @@
+$ composer archive create -a test-bna.bna —sourceType dir —sourceName .
+
+$ composer network install -a test-bna@0.0.1.bna -c PeerAdmin@hlfv1
+
+$ composer network start -c PeerAdmin@hlfv1 -n test-bna -V 0.0.1 -A admin -S adminpw
+
+$ composer card import -f ./admin\@test-bna.card
+
+( -> execute  $ composer-rest-server)
+
+( -> execute $ yo hyperledger-composer:angular
+
+-> $ npm start

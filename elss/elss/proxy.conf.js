@@ -33,7 +33,8 @@ module.exports = [{
     context: ['/auth', '/api'],
     target,
     secure: true,
-    changeOrigin: true
+    changeOrigin: true,
+    
 }, {
     context: '/',
     target,

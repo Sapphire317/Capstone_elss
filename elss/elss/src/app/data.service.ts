@@ -55,6 +55,7 @@ export class DataService<Type> {
           .map(this.extractData)
           .catch(this.handleError);
     }
+    
 
     public update(ns: string, id: string, itemToUpdate: Type): Observable<Type> {
         console.log('Update ' + ns);
