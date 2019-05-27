@@ -86,6 +86,7 @@ public model: any = { date: { year: 2018, month: 10, day: 9 } };
       this.allTransactions = tempList;
     })
     .catch((error) => {
+      alert(error);
       if (error === 'Server error') {
         this.errorMessage = 'Could not connect to REST server. Please check your configuration details';
       } else if (error === '404 - Not Found') {
@@ -108,6 +109,7 @@ public model: any = { date: { year: 2018, month: 10, day: 9 } };
       this.allAssets = tempList;
     })
     .catch((error) => {
+      alert(error);
       if (error === 'Server error') {
         this.errorMessage = 'Could not connect to REST server. Please check your configuration details';
       } else if (error === '404 - Not Found') {
@@ -177,6 +179,7 @@ public model: any = { date: { year: 2018, month: 10, day: 9 } };
       });
     })
     .catch((error) => {
+      alert(error);
       if (error === 'Server error') {
         this.errorMessage = 'Could not connect to REST server. Please check your configuration details';
       } else {
@@ -210,6 +213,7 @@ public model: any = { date: { year: 2018, month: 10, day: 9 } };
       });
     })
     .catch((error) => {
+      alert(error);
       if (error === 'Server error') {
         this.errorMessage = 'Could not connect to REST server. Please check your configuration details';
       } else {

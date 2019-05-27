@@ -60,6 +60,9 @@ import { CastedstuComponent } from './components/em/candidate/castedstu/castedst
 import { StuprofileComponent } from './components/student/stuprofile/stuprofile.component';
 import { SocialLoginModule, AuthServiceConfig } from 'angular4-social-login';
 import { GoogleLoginProvider, FacebookLoginProvider } from 'angular4-social-login';
+import { EmloginComponent } from './components/em/emlogin/emlogin.component';
+import { AologinComponent } from './components/ao/aologin/aologin.component';
+import { TfloginComponent } from './components/tf/tflogin/tflogin.component';
 
 // const config = {
 //   apiKey: "AIzaSyDD6dNsWvbAa1Uz86VsR7CR-vl3jVm7NLg",
@@ -117,7 +120,10 @@ export function provideConfig() {
     CandidateComponent,
     BallotComponent,
     CastedstuComponent,
-    StuprofileComponent
+    StuprofileComponent,
+    EmloginComponent,
+    AologinComponent,
+    TfloginComponent
   ],
   imports: [
     BrowserModule,
@@ -127,7 +133,7 @@ export function provideConfig() {
     AppRoutingModule,
     MyDatePickerModule,
     HttpClientModule,
-    SocialLoginModule.initialize(config)
+    SocialLoginModule
   ],
   providers: [
     {

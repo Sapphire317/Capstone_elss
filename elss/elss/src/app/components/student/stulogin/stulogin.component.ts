@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AuthService } from 'angular4-social-login';
 import {  GoogleLoginProvider } from "angular4-social-login";
 import { SocialUser } from "angular4-social-login";
+import { Router, RouterModule } from '@angular/router';
 
 
 
@@ -15,7 +16,7 @@ export class StuloginComponent implements OnInit {
   private user: SocialUser;
   private loggedIn: boolean;
 
-  constructor(private authService: AuthService) { }
+  constructor(private authService: AuthService, private router: Router) { }
 
   ngOnInit() {
     this.authService.authState.subscribe((user) => {
@@ -25,7 +26,17 @@ export class StuloginComponent implements OnInit {
   }
 
   signInWithGoogle(): void {
-    this.authService.signIn(GoogleLoginProvider.PROVIDER_ID);
+    this.authService.signIn(GoogleLoginProvider.PROVIDER_ID).then(()=>{
+
+      if(this.loggedIn){
+        this.router.navigate(['/stu_main']);
+      }else{
+        alert('Login failed');
+      }
+
+    }
+      
+    );
   }
 
   signOut(): void {

@@ -50,7 +50,7 @@ export class CastedstuComponent implements OnInit {
 
   ngOnInit() {
     this.loadElection();
-    console.log(this.castedList);
+    
   }
 
 }

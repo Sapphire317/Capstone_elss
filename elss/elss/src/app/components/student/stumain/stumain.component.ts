@@ -113,6 +113,12 @@ export class StumainComponent implements OnInit {
     }
     return true;
   }
+
+  signOut(): void {
+    this.authService.signOut().then(()=> {
+      this.router.navigate(['/stu_login']);
+    });
+  }
 }
 
 

@@ -14,116 +14,29 @@
 <nav class="navbar navbar-inverse">
     <div class="container-fluid">
       <div class="navbar-header">
-        <p class="network-name">elss@0.0.6.bna</p>
-        <p class="navbar-brand">elss</p>
+        <p class="network-name"></p>
+        <p class="navbar-brand justify-content-center ">한동 선거 시스템</p>
       </div>
-      <div *ngIf="loggedIn;else login"> 
-      <button (click)="signOut()" class="btn btn-danger">
-         Sign Out
-      </button>
-      </div>
-  
-      <ng-template #login>
-      <div>
-        <button (click)="signInWithGoogle()" class="btn btn-success">
-        <i class="fa fa-google"></i> 
-        </button>
-      </div>
-      </ng-template>
+      
       <ul class="nav navbar-nav">
       <li>
-      <a class="dropdown-toggle" data-toggle="dropdown" [routerLink]="['/EM']">EM</a>
+      <a class="dropdown-toggle" data-toggle="dropdown" [routerLink]="['/emlogin']">EM</a>
       </li>
 
       <li>
-      <a class="dropdown-toggle" data-toggle="dropdown" [routerLink]="['/AO']">AO</a>
+      <a class="dropdown-toggle" data-toggle="dropdown" [routerLink]="['/aologin']">AO</a>
       </li>
 
       <li>
-      <a class="dropdown-toggle" data-toggle="dropdown" [routerLink]="['/TF']">TF</a>
+      <a class="dropdown-toggle" data-toggle="dropdown" [routerLink]="['/tflogin']">TF</a>
       </li>
 
       
        <li class="dropdown active">
-            <a class="dropdown-toggle" data-toggle="dropdown">Students</a>
-            <ul class="dropdown-menu scrollable-menu">
-              
-              <li><a [routerLink]="['/stu_login']">Log-in</a></li>
-              
-              <li><a [routerLink]="['/stu_main']">main</a></li>
-              
-            </ul>
+            <a class="dropdown-toggle" data-toggle="dropdown" [routerLink]="['/stu_login'] ">Students</a>
       </li>
 
-        <li class="dropdown active">
-            <a class="dropdown-toggle" data-toggle="dropdown">Assets</a>
-            <ul class="dropdown-menu scrollable-menu">
-              
-              <li><a [routerLink]="['/Election']">Election</a></li>
-              
-              <li><a [routerLink]="['/Student']">Student</a></li>
-              
-              <li><a [routerLink]="['/VotingBox']">VotingBox</a></li>
-              
-            </ul>
-        </li>
-        <li class="dropdown active">
-          <a class="dropdown-toggle" data-toggle="dropdown">Participants</a>
-          <ul class="dropdown-menu scrollable-menu">
-            
-            <li><a [routerLink]="['/AONetworkAdmin']">AONetworkAdmin</a></li>
-            
-            <li><a [routerLink]="['/AOPersonnel']">AOPersonnel</a></li>
-            
-            <li><a [routerLink]="['/EMNetworkAdmin']">EMNetworkAdmin</a></li>
-            
-            <li><a [routerLink]="['/EMPersonnel']">EMPersonnel</a></li>
-            
-            <li><a [routerLink]="['/Voters']">Voters</a></li>
-            
-            <li><a [routerLink]="['/TFNetworkAdmin']">TFNetworkAdmin</a></li>
-            
-            <li><a [routerLink]="['/TFPersonnel']">TFPersonnel</a></li>
-            
-          </ul>
-      </li>
-      <li class="dropdown active">
-        <a class="dropdown-toggle" data-toggle="dropdown">Transactions</a>
-        <ul class="dropdown-menu scrollable-menu">
-          
-          <li><a [routerLink]="['/ballotCast']">ballotCast</a></li>
-          <li><a [routerLink]="['/deleteElection']">deleteElection</a></li>
-          
-          <li><a [routerLink]="['/addCasted']">addCasted</a></li>
-          
-          <li><a [routerLink]="['/createVotingBox']">createVotingBox</a></li>
-
-           <li><a [routerLink]="['/addVotingBox']">addVotingBox</a></li>
-          
-          <li><a [routerLink]="['/deleteVotingBox']">deleteVotingBox</a></li>
-          
-          <li><a [routerLink]="['/setAttendance']">setAttendance</a></li>
-          
-          <li><a [routerLink]="['/createElection']">createElection</a></li>
-          
-          
-          
-          <li><a [routerLink]="['/changeElectionStatus']">changeElectionStatus</a></li>
-          
-         
-          
-          
-          
-          <li><a [routerLink]="['/createStudent']">createStudent</a></li>
-          
-          <li><a [routerLink]="['/modifyStudent']">modifyStudent</a></li>
-          
-          <li><a [routerLink]="['/deleteStudent']">deleteStudent</a></li>
-          
-          
-          
-        </ul>
-    </li>
+        
       </ul>
     </div>
   </nav>

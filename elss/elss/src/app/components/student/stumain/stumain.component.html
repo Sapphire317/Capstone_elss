@@ -7,6 +7,12 @@
     <div class="col-md-9">
         <h1 class="asset-title" id='assetName'>선거</h1>
     </div>
+
+    <div class="col-md-3">
+        <button (click)="signOut()" class="btn btn-danger">
+         Sign Out
+      </button>
+    </div>
     
   </div>
   <br>
@@ -36,7 +42,7 @@
             
                 <td class="asset-properties">{{asset.school}}</td>
             
-                <td class="asset-properties">{{asset.electionDate}}</td>
+                <td class="asset-properties">{{asset.electionDate | date: 'yyyy-MM-dd'}}</td>
       
             
                 <td class="asset-properties">{{asset.status}}</td>

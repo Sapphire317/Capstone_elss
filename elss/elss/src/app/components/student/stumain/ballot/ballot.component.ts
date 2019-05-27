@@ -24,7 +24,10 @@ export class BallotComponent implements OnInit {
 
   private allAssets;
   private allTransactions;
-  private Transaction;
+
+  private ACTransaction;
+  private BCTransaction;
+
   private currentId;
   private errorMessage;
 
@@ -35,7 +38,8 @@ export class BallotComponent implements OnInit {
 
   boxId = new FormControl('', Validators.required);
   name = new FormControl('', Validators.required);
-  transactionId = new FormControl('', Validators.required);
+  ACtransactionId = new FormControl('', Validators.required);
+  BCtransactionId = new FormControl('', Validators.required);
   timestamp = new FormControl('', Validators.required);
 
   constructor(private route: ActivatedRoute, private serviceB: BallotService, fb: FormBuilder, private authService: AuthService) {
@@ -45,8 +49,8 @@ export class BallotComponent implements OnInit {
 
   this.BCForm = fb.group({
     boxId: this.electionKey,
-    transactionId: this.transactionId,
-    timestamp: this.timestamp
+    transactionId: null,
+    timestamp: null
   });
 
   this.ACForm = fb.group({
@@ -98,7 +102,7 @@ export class BallotComponent implements OnInit {
   }
 
   ballotCast(): Promise<any> {
-    this.Transaction = {
+    this.BCTransaction = {
       $class: 'org.elss.votingbox.ballotCast',
       'boxId': this.boxId,
       'transactionId': null,
@@ -111,7 +115,7 @@ export class BallotComponent implements OnInit {
       'timestamp': null
     });
 
-    return this.serviceB.BallotCast(this.Transaction)
+    return this.serviceB.BallotCast(this.BCTransaction)
     .toPromise()
     .then(() => {
       this.errorMessage = null;
@@ -152,12 +156,12 @@ export class BallotComponent implements OnInit {
   }
 
   addCasted(): Promise<any> {
-    this.Transaction = {
+    this.ACTransaction = {
       $class: 'org.elss.election.addCasted',
       'electionKey': this.electionKey,
       'studentId': this.stuId,
-      'transactionId': this.transactionId.value,
-      'timestamp': this.timestamp.value
+      'transactionId': null,
+      'timestamp': null
     };
 
     this.ACForm.setValue({
@@ -167,7 +171,7 @@ export class BallotComponent implements OnInit {
       'timestamp': null
     });
 
-    return this.serviceB.addCasted(this.Transaction)
+    return this.serviceB.addCasted(this.ACTransaction)
     .toPromise()
     .then(() => {
       this.errorMessage = null;
